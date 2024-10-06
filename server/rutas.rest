@@ -1,0 +1,23 @@
+@hostname = http://localhost
+@port = 3000
+@api = {{hostname}}:{{port}}
+@contentType = Content-Type: application/json
+
+###Home
+GET {{api}}:3000/
+
+###Logearse
+# @name tokenAPI
+POST {{api}}/login
+{{contentType}}
+
+{
+    "email":"docente@desafiolatam.com",
+    "password":"1234"
+}
+
+@authToken = {{tokenAPI.response.body.token}}
+
+###Obtener usuario logeado
+GET {{api}}/usuarios
+Authorization: Bearer {{authToken}}
